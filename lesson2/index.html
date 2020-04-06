@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>vue学习第二课</title>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <head>
+
+    <body>
+        <div id="app">
+            <p>message:{{msg}}</p>
+            <p><span v-html="msg"></span></p>
+            <button :disabled="isDisabled">button</button>
+            <p>{{!count}}</p>
+            <p>{{num+1}}</p>
+            <p>{{!count?"haole":"huaile"}}</p>
+            <p v-if="!count">你到底看不看得见呢</p>
+            <p v-bind:[hrefname]="url">动态参数</p>
+        </div>
+
+        <script>
+            var vm = new Vue({
+                el:"#app",
+                data:{
+                    msg:"<p>5555</p>",
+                    isDisabled:false,
+                    count:true,
+                    num:1,
+                    hrefname:null,
+                    url:"www.baidu.com"
+                }
+            })
+        </script>
+    <body>
+   
+<html>
