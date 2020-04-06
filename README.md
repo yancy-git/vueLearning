@@ -16,9 +16,14 @@
             在控制台中执行：app4.todos.push({ text: 'New item' })
                 页面上动态的加载最新的数据
     3.处理用户输入：
-        使用v-on指令附加事件侦听器：
+        使用v-on指令附加事件侦听器：反转信息
             v-on:click="reverseMessage"
                 reverseMessage：函数名（在methods中指定,自定义）
+                反转的具体语句：
+                    this.message = this.message..reverse().join('')
+                    split('')----将字符串分割成单个字母，并以数组的方式按顺序存储
+                    reverse()----数组翻转
+                    join('')----数组中的元素按顺序拼接
         双向绑定：
             v-model="message"
                 例如input绑定这个指令, 则文本框中的内容就是data中的message
