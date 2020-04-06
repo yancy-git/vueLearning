@@ -27,3 +27,4 @@
         双向绑定：
             v-model="message"
                 例如input绑定这个指令, 则文本框中的内容就是data中的message
+    4.组成组件：不是很理解，只能勉强抄着用
