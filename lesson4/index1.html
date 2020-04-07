@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>列表渲染</title>
+    <meta charset="UTF-8" />
+    <script src="./js/vue.min.js"></script>
+
+    <head>
+
+    <body>
+        <!-- <ul id="example-1">
+            <li v-for="(item,index) in items"  :key="item.message">
+                第{{index+1}}个--{{ item.message }}
+            </li>
+        </ul> -->
+
+        <!-- <ul id="v-for-duixiang" class="demo">
+            <li v-for="(value,key) in arr">
+                {{ value }}----{{key}}
+            </li>
+        </ul> -->
+        
+        <ul id="app" v-for="set in sets">
+            <li v-for="n in even(set)">{{ n }}</li>
+        </ul>
+        <script>
+            // var example1 = new Vue({
+            //     el: '#example-1',
+            //     data: {
+            //         items: [
+            //             { message: 'Foo' },
+            //             { message: 'Bar' }
+            //         ]
+            //     }
+            // })
+            var vm = new Vue({
+                el: '#app',
+                // data: {
+                //     duixiang: {
+                //         title: 'How to do lists in Vue',
+                //         author: 'Jane Doe',
+                //         publishedAt: '2016-04-10'
+                //     },
+                //     arr:[
+                //         "ddsfdf",
+                //         "aaa",
+                //         "ccc"
+                //     ]
+                // }
+                data: {
+                    sets: [
+                        [1, 2, 3, 4, 5], 
+                        [6, 7, 8, 9, 10]
+                    ]
+                },
+                methods: {
+                    even: function (numbers) {
+                        return numbers.filter(function (number) {
+                            return number % 2 === 0
+                        })
+                    }
+                }
+            })
+        </script>
+
+<body>
+    <html>

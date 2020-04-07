@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>vue学习第四课</title>
+    <meta charset="UTF-8" />
+    <script src="./js/vue.min.js"></script>
+
+    <head>
+
+    <body>
+        <!-- 绑定到返回对象的计算属性中 -->
+        <div v-bind:class="classObject" id="app"></div>
+        <!-- 数组语法，可以在数组中使用对象语法 -->
+        <div v-bind:class="[{ active: isActive }, errorClass]"></div>
+        <!-- 自定义组件 -->
+        <!-- <my-component class="baz boo"></my-component> -->
+
+        <template v-if="ok">
+            <h1>Title</h1>
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+        </template>
+        <script>
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    isActive: true,
+                    error: null,
+                    ok:false
+                },
+                computed: {
+                    classObject: function () {
+                        return {
+                            active: this.isActive && !this.error,
+                            'text-danger': this.error && this.error.type === 'fatal'
+                        }
+                    }
+                }
+            })
+            // 自定义组件
+            // Vue.component('my-component', {
+            //     template: '<p class="foo bar">Hi</p>'
+            // })
+
+            Vue.component('template', {
+                template: '<p class="foo bar">Hi</p>'
+            })
+        </script>
+
+<body>
+    <html>

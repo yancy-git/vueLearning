@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>小练习：待办事项</title>
+        <meta charset="UTF-8"/>
+        <script src="./js/vue.min.js"></script>
+    <head>
+    <body>
+        <div id="div">
+            <label for="#">加到全部</label>
+            <input type="text" v-model="name">
+            <button @click="add">添加</button>
+           
+            <ul>
+                <li v-for="(todo,index) in todos" :key="todo.value">{{todo}}
+                    <button @click="del(index)">删除</button>
+                </li>
+            </ul>
+            <!-- <todo-item v-for="item in items" :key="item.value">
+                
+            </todo-item> -->
+            <!-- <ul>
+                <li>
+                    is="todo-item"
+                    v-for="(todo,index) in todos"
+                    v-bind:key="index"
+                    v-bind:value="todo.value"
+                    v-on:click="del(index)"
+                </li>
+            </ul> -->
+            
+        </div>
+        
+        <script>
+            new Vue({
+                el:"#div",
+                data:{
+                    name:"",
+                    todos:[
+                        "洗衣服",
+                        "睡觉"
+                    ]
+                },
+                methods:{
+                    add:function(){
+                        // alert(this.name);
+                        this.todos.push(this.name);
+                        this.name="";
+                    },
+                    del:function(index){
+                        this.todos.splice(index,1);
+                    }
+                }
+            })
+            // Vue.component("todo-item",{
+            //     template:'<ul>\
+            //                 <li v-for="(todo,index) in todos" :key="todo.value">{{todo}}\
+            //                     <button @click="del(index)">删除</button>\
+            //                 </li>\
+            //             </ul> '
+            //     props:
+            // })
+        </script>
+    <body>
+<html>

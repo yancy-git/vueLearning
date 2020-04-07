@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>对template的小练习01</title>
+        <meta charset="UTF-8"/>
+        <script src="./js/vue.min.js"></script>
+    <head>
+    <body>
+        <section v-if="display">
+            {{msg}}
+        </section>
+    <body>
+        <script>
+            var vm = new Vue({
+                el:"section",
+                data:{
+                    msg:"嘿嘿额",
+                    display:true
+                }
+            })
+            setInterval(() => {
+                vm.display=!vm.display;
+            }, 300);
+        </script>
+<html>
