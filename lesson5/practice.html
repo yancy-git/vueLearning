@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>对template一个小练习</title>
+    <meta charset="UTF-8" />
+    <script src="./js/vue.min.js"></script>
+
+    <head>
+
+    <body>
+        <div id="app">
+            <label>{{way}}</label>
+            <template v-if="way == 'qq'">
+                <input placeholder="Enter your qq" v-model="shuru">
+            </template>
+            <template v-else>
+                <input placeholder="Enter your email address" v-model="shuru">
+            </template>
+            <button @click="changeWay">切换登陆方式</button>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    way: "qq",
+                    shuru: ""
+                },
+                methods: {
+                    changeWay: function () {
+                        if(this.way=="qq"){
+                            this.way="email";
+                        }else{
+                            this.way="qq";
+                        }
+                    }
+                }
+            })
+        </script>
+
+<body>
+    <html>
