@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>小练习：动态组件</title>
+    <meta charset="UTF-8" />
+    <script src="./js/vue.min.js"></script>
+    <style>
+        .tab-button {
+            padding: 6px 10px;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            background: #f0f0f0;
+            margin-bottom: -1px;
+            margin-right: -1px;
+        }
+
+        .tab-button:hover {
+            background: #e0e0e0;
+        }
+
+        .tab-button.active {
+            background: #e0e0e0;
+        }
+
+        .div-msg {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+
+    <head>
+
+    <body>
+        <div id="app">
+            <!-- <button @click="changeMsg($event)" value="Home">home</button>
+            <button @click="changeMsg($event)" value="Posts">posts</button>
+            <button @click="changeMsg($event)" value="Archive">archive</button>
+            <div class="div-msg">{{msg}}</div> -->
+            <button 
+                v-for="bt in bts"
+                :key="bt"
+                v-bind:class="['tab-button', { active: msg === bt }]"
+                @click="changeMsg($event)"
+                :value="bt"
+            >
+                {{bt}}
+            </button>
+            <!-- <component is="msg" class="div-msg"></component> -->
+            <component :is="msg" class="div-msg"></component>
+        </div>
+        <script>
+            // new Vue({
+            //     el: "#app",
+            //     data: {
+            //         msg: '66',
+            //     },
+            //     methods:{
+            //         changeMsg:function(event){
+            //             // console.log(event.target.value);
+            //             this.msg=event.target.value+" "+"component"
+                        
+            //         }
+            //     }
+            // })
+            Vue.component("Home",{
+                template:`<div>Home component</div>`
+            })
+            Vue.component("Posts",{
+                template:`<div>Posts component</div>`
+            })
+            Vue.component("Archive",{
+                template:`<div>Archive component</div>`
+            })
+            var vm = new Vue({
+                el:"#app",
+                data:{
+                    bts:['Home','Posts','Archive'],
+                    msg:"Home",
+                },
+                methods:{
+                    changeMsg:function(event){
+                        // console.log(event.target.value);
+                        this.msg=event.target.value;
+                        
+                    }
+                }
+            })
+        </script>
+
+<body>
+    <html>

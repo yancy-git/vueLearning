@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>小练习：组件基础</title>
+    <meta charset="UTF-8" />
+    <script src="./js/vue.min.js"></script>
+
+    <head>
+
+    <body>
+        <!-- <div id="app">
+            <my-component></my-component>
+            <my-component></my-component>
+            <my-component></my-component>
+            <blog-post title="this is title"></blog-post>
+        </div> -->
+        <!-- <div id="app">
+            <div :style="{ fontSize: postsize + 'em' }">
+                <my-note v-for="post in posts" :key="post.id" :post="post" @larger="larger"></my-note>
+            </div> -->
+        <!-- <my-note v-for="post in posts" :key="post.id" :title="post.title" :note="post.note"></my-note> -->
+        <!-- </div> -->
+        <!-- <div id="app">
+            <custom-input v-model="msg"></custom-input>
+            msg:{{msg}}
+        </div> -->
+        <div id="app">
+            <!-- <box1>{{msg}}</box1> -->
+            <component :is="arr">{{ msg }}</component>
+            <input type="text" v-model="arr">
+        </div>
+        <script>
+            Vue.component('box1',{
+                template:`
+                    <div>
+                        <strong>Error1</strong>
+                        <slot></slot>
+                    </div>
+                `
+            })
+            Vue.component('box2',{
+                template:`
+                    <div>
+                        <strong>Error2</strong>
+                        <slot></slot>
+                    </div>
+                `
+            })
+            new Vue({
+                el:"#app",
+                data:{
+                    msg:"hello world",
+                    arr:"box1",
+                }
+            })
+        </script>
+        <script>
+            // Vue.component("my-component", {
+            //     // 一个组件的 data 选项必须是一个函数
+            //     data: function () {
+            //         return {
+            //             count: 0
+            //         }
+            //     },
+            //     template: '<button @click="count++">now count:{{count}}</button>'
+            // })
+            // Vue.component("blog-post", {
+            //     props: ['title'],
+            //     template: '<h3>{{ title }}</h3>'
+            // })
+            // Vue.component("my-note",{
+            //     props:["title","note"],
+            //     template:'\
+            //         <div>\
+            //         <h3>the title:{{title}}</h3>\
+            //         <label>the note:{{note}}</label>\
+            //         </div>\
+            //         '
+            // })
+            // Vue.component("my-note",{
+            //     props:["post"],
+            //     template:'\
+            //         <div>\
+            //         <h3>the title:{{post.title}}</h3>\
+            //         <label>the note:{{post.note}}</label>\
+            //         <button @click="$emit(\'larger\',1)">大大大</button>\
+            //         </div>\
+            //         '
+            // })
+            // new Vue({
+            //     el: "#app"
+            // })
+
+            // new Vue({
+            //     el: '#app',
+            //     data: {
+            //         posts: [
+            //             { id: 1, title: 'My journey with Vue',note:"the first note" },
+            //             { id: 2, title: 'Blogging with Vue',note:"the sec note"  },
+            //             { id: 3, title: 'Why Vue is so fun',note:"the third note"  }
+            //         ],
+            //         postsize:1
+            //     },
+            //     methods:{
+            //         larger:function(size){
+            //             this.postsize += size
+            //         }
+            //     }
+            // })
+
+        </script>
+        <script>
+            // 在模板上使用v-model
+            // Vue.component('custom-input', {
+            //     props: ['value'],
+            //     template: `
+            //         <input
+            //         v-bind:value="value"
+            //         v-on:input="$emit('input', $event.target.value)"
+            //         >
+            //     `
+            // })
+            // new Vue({
+            //     el: "#app",
+            //     data: {
+            //         msg: "666"
+            //     }
+            // })
+        </script>
+<body>
+    <html>
