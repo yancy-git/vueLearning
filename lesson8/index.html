@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vue学习第八课</title>
+    <meta charset="UTF-8" />
+    <script src="./js/vue.min.js"></script>
+
+    <head>
+
+    <body>
+        <div id="app">
+            <my-name initial-counter="666" size="  YANCY  ">这是文本</my-name>
+            <!-- 禁用Attribute继承 -->
+            <base-input label="my name is:" placeholder="yancy"></base-input>
+        </div>
+        <script>
+            Vue.component("my-name", {
+                props: ['initial-counter', 'size'],
+                data: function () {
+                    return {
+                        counter: this.initialCounter
+                    }
+                },
+                computed: {
+                    toLowerSize: function () {
+                        return this.size.trim().toLowerCase()
+                    }
+                },
+                template: `
+                    <div>the counter:{{counter}}
+                    <p>the size:{{toLowerSize}}<slot></slot></p>
+                    
+                    </div>
+                `
+            })
+
+            // 禁用Attribute继承
+            Vue.component('base-input', {
+                inheritAttrs: false,
+                props: ['label', 'value'],
+                template: `
+                    <label>
+                    {{ label }}
+                    <input
+                        v-bind="$attrs"
+                        v-bind:value="value"
+                        v-on:input="$emit('input', $event.target.value)"
+                    >
+                    </label>
+                `
+            })
+            new Vue({
+                el: "#app",
+                data: {
+
+                }
+            })
+        </script>
+
+<body>
+    <html>
