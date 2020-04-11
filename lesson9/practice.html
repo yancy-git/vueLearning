@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>小练习：组件中进行双向绑定</title>
+    <meta charset="UTF-8" />
+    <script src="./js/vue.min.js"></script>
+
+    <head>
+
+    <body>
+        <div id="app">
+            <my-component 
+                :name="person.name" 
+                :age="person.age" 
+                :hobby="person.hobby" 
+                v-on:updata-name="updateName" 
+                v-on:updata-age="updateAge"
+                v-on:updata-hobby="updateHobby"
+            ></my-component>
+            <hr>
+            <my-component
+                v-bind:name.sync="person.name"
+                v-bind:age.sync="person.age"
+                v-bind:hobby.sync="person.hobby"
+            ></my-component>
+            <hr>
+            <my-component
+                v-bind.sync="person"
+            ></my-component>
+        </div>
+        <hr>
+        <div id="app2">
+            <my-component1 
+                v-bind:name="person.name" 
+                v-on:updata-name="updateName" 
+            ></my-component1>
+        <hr>
+            <my-component1 
+                v-bind:name.sync="person.name"
+            ></my-component1>
+        </div>
+        <script>
+            Vue.component("my-component", {
+                props: ['name','age','hobby'],
+                template: `
+                    <div>
+                        person:{{name}}--{{age}}岁--喜欢{{hobby}}
+                        <p>
+                            修改姓名:
+                            <input 
+                                type="text"
+                                v-on:input="nameUpdate"
+                            />
+                        </p>
+                        <p>
+                            修改年龄:
+                            <input 
+                                type="text"
+                                v-on:input="ageUpdate"
+                            />
+                        </p>
+                        <p>
+                            修改爱好:
+                            <input 
+                                type="text"
+                                v-on:input="hobbyUpdate"
+                            />
+                        </p>
+                    </div>
+                `,
+                methods: {
+                    nameUpdate: function (event) {
+                        // console.log(event.target.value);
+                        var newValue = event.target.value;
+                        this.$emit('updata-name', newValue);
+                    },
+                    ageUpdate: function (event) {
+                        let newValue = event.target.value;
+                        this.$emit('updata-age', newValue);
+                    },
+                    hobbyUpdate: function (event) {
+                        let newValue = event.target.value;
+                        this.$emit('updata-hobby', newValue);
+                    }
+                }
+            })
+            Vue.component("my-component1", {
+                props: ['name'],
+                template: `
+                    <div>
+                        person:{{name}}
+                        <p>
+                            修改姓名:
+                            <input 
+                                type="text"
+                                v-on:input="nameUpdate"
+                            />
+                        </p>
+                    </div>
+                `,
+                methods:{
+                    nameUpdate: function (event) {
+                        // console.log(event.target.value);
+                        var newValue = event.target.value;
+                        this.$emit('updata-name', newValue);
+                    },
+                }  
+            })
+            new Vue({
+                el: "#app",
+                data: {
+                    person: {
+                        name: "jim",
+                        age: 15,
+                        hobby: "play basketball"
+                    },
+                },
+                methods: {
+                    updateName: function (newValue) {
+                        this.person.name = newValue;
+                    },
+                    updateAge: function (newValue) {
+                        this.person.age = newValue;
+                    },
+                    updateHobby: function (newValue) {
+                        this.person.hobby = newValue;
+                    },
+                }
+            })
+            new Vue({
+                el:"#app2",
+                data: {
+                    person: {
+                        name: "jim",
+                    },
+                },
+                methods: {
+                    updateName: function (newValue) {
+                        this.person.name = newValue;
+                    },
+                }
+            })
+        </script>
+
+<body>
+    <html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vue学习第九课</title>
+    <meta charset="UTF-8" />
+    <script src="./js/vue.min.js"></script>
+
+    <head>
+
+    <body>
+        <div id="app">
+            <base-checkbox :checked="lovingVue" v-on:change="onChange"></base-checkbox>
+            <div>
+                {{ lovingVue }}
+            </div>
+        </div>
+        <div id="app1">
+            <input type="text" v-on:focus="onFocus" v-on:blur="onBlur" placeholder="your name">
+        </div>
+        <div id="app2">
+            <sync-test :title="name" v-on:update:title="titleUpdate"></sync-test>
+            <sync-test v-bind:title.sync="name"></sync-test>
+        </div>
+        <script>
+            Vue.component('base-checkbox', {
+                // 这里将checked生命为模板，相当于v-model的功能，注意：仍然需要在props中声明checked
+                model: {
+                    prop: "checked",
+                    event: "change"
+                },
+                props: {
+                    checked: Boolean
+                },
+                template: `
+                    <input 
+                        type="checkbox"
+                        v-bind:checked="checked"
+                        v-on:change="$emit('change',$event.target.checked)"
+                    />
+                `
+            })
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    lovingVue: true,
+                },
+                methods: {
+                    onChange: function (value) {
+                        this.lovingVue = value
+
+                    }
+                }
+            })
+        </script>
+        <script>
+            new Vue({
+                el: "#app1",
+                data: {
+
+                },
+                methods: {
+                    onFocus: function () {
+                        console.log("获得焦点事件触发了");
+                    },
+                    onBlur: function () {
+                        console.log("失去焦点事件触发了");
+                    }
+                }
+            })
+        </script>
+        <script>
+            Vue.component("sync-test", {
+                props: ["title"],
+                template: `
+                    <label>
+                        {{title}}
+                        <input 
+                            type="text"
+                            v-on:input="inputUpdate"
+                        >
+                    </label>
+               `,
+               methods:{
+                inputUpdate:function(event){
+                    var newValue= event.target.value;
+                    this.$emit('update:title',newValue)
+                }
+               }
+            })
+            new Vue({
+                el: "#app2",
+                data: {
+                    name: "jimmy"
+                },
+                methods:{
+                    titleUpdate:function(newValue){
+                        this.name = newValue;
+                    }
+                }
+            })
+        </script>
+
+<body>
+    <html>
