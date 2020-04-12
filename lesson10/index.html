@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>vue学习第十课</title>
+        <meta charset="UTF-8"/>
+        <script src="./js/vue.min.js"></script>
+    <head>
+    <body>
+        <div id="app">
+            <navigation-link>
+                
+            </navigation-link>
+        </div>
+        <script>
+            Vue.component("navigation-link",{
+                template:`
+                    <lebel>
+                        <slot name="kone"></slot>
+                        <hr>  
+                        <slot name="kone"></slot> 
+                    </label>
+                `
+            })
+            new Vue({
+                el:"#app",
+                data:{
+
+                }
+            })
+        </script>
+    <body>
+<html>
