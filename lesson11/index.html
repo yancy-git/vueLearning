@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>vue学习第十一课</title>
+    <meta charset="UTF-8" />
+    <script src="./js/vue.min.js"></script>
+
+    <head>
+
+    <body>
+        <div id="app">
+            <input type="button" value="切换组件" @click="changeCom">
+            <keep-alive>
+                <component :is="currtComponent"></component>
+            </keep-alive>
+            <async-example></async-example>
+            <button @click="theTest">点击试试</button>
+        </div>
+        <script>
+            Vue.component("comp-one", {
+                template: `
+                    <input
+                        type="text"
+                        placeholder="your username"
+                    />
+                `
+            })
+            Vue.component("comp-two", {
+                template: `
+                    <label>
+                        切换到这里再回去看    
+                    </label>
+                `
+            })
+            // 异步组件
+            Vue.component('async-example', function (resolve, reject) {
+                setTimeout(function () {
+                    // 向 `resolve` 回调传递组件定义
+                    resolve({
+                        template: '<div>I am async!</div>'
+                    })
+                }, 1000)
+            })
+            new Vue({
+                el: "#app",
+                data: {
+                    currtComponent: "comp-one",
+                    number: 0
+                },
+                methods: {
+                    changeCom: function () {
+                        this.number++;
+                        console.log("called this func", this.number);
+
+                        if (this.number % 2 == 0) {
+                            this.currtComponent = "comp-one";
+                        } else {
+                            this.currtComponent = "comp-two";
+                        }
+
+                    },
+                    theTest(event){
+                        console.log(event.target.innerHTML);
+                        
+                    }
+                }
+            })
+        </script>
+
+<body>
+    <html>
