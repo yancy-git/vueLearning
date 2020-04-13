@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>vue学习第十二课</title>
+    <meta charset="UTF-8" />
+    <script src="./js/vue.min.js"></script>
+
+    <head>
+
+    <body>
+        <div id="app">
+            <!-- <visit-parent>点我</visit-parent> -->
+            <base-input>
+                <!-- <template>
+                    <label>usernameInput中的内容为:</label>
+                    this.$refs.usernameInput.value;
+                </template> -->
+            </base-input>
+            <vfor-and-refs :todos="todos"></vfor-and-refs>
+        </div>
+        <script>
+            Vue.component("visit-parent", {
+                template: `
+                    <button
+                        @click="clickMe"
+                    >
+                    <slot></slot>
+                    </button>
+                `,
+                methods: {
+                    clickMe() {
+                        console.log(this.$root.foo);
+
+                    }
+                }
+            })
+            Vue.component("base-input", {
+                template: `
+                    <div>
+                        <input
+                            type="text"
+                            ref="input"
+                        ></input>
+                        <hr>
+                        <input
+                            type="text"
+                            ref="usernameInput666"
+                        ></input>
+                        <button @click="focus">dianwo</button>
+                        <slot></slot>
+                    </div>
+                `,
+                methods: {
+                    focus: function () {
+                        console.log("called");
+                        this.$refs.usernameInput666.focus()
+                    }
+                }
+            })
+            Vue.component("vfor-and-refs",{
+                props:["todos"],
+                template:`
+                    <div>
+                        <label
+                            v-for="todo in todos"
+                            :key="todo.id"
+                            :ref="todo.id"
+                            :value="todo.name"
+                        >
+                            {{todo.name}}
+                            <button
+                            @click="vforAndRefs(todo.id)"
+                        >点击去{{todo.name}}</button>
+                        </label>
+                        
+                    </div>
+                `,
+                methods:{
+                    vforAndRefs(id){
+                        // console.log(id,event.target);
+                        console.log(this.$refs[id][0].innerText);
+                    }
+                }
+            })
+            new Vue({
+                el: "#app",
+                data: {
+                    foo: 1,
+                    todos:[
+                        {name:"saodi",id:1},
+                        {name:"zuofan",id:2}
+                    ]
+                },
+                computed: {
+                    bar: function () { /* ... */ }
+                },
+                methods: {
+                    baz: function () { /* ... */ },
+                }
+            })
+        </script>
+
+<body>
+    <html>
