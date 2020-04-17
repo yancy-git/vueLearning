@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>vue学习第十三课</title>
+    <meta charset="UTF-8" />
+    <script src="./js/vue.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <head>
+
+    <body>
+        <div id="demo">
+            <button v-on:click="show = !show">
+                Toggle
+            </button>
+            <transition name="fade">
+                <p v-if="show">hello</p>
+            </transition>
+        </div>
+        <script>
+            new Vue({
+                el: '#demo',
+                data: {
+                    show: true
+                }
+            })
+        </script>
+
+<body>
+    <html>
