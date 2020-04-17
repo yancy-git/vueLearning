@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>vue学习第十四课</title>
+    <meta charset="UTF-8" />
+    <script src="./js/vue.min.js"></script>
+
+    <head>
+
+    <body>
+        <div id="demo"> 这是我
+            <my-component>
+            <p v-slot:foo>
+                first
+            </p>
+            <p>second</p>
+            </my-component>
+            <!-- <my-component></my-component> -->
+
+            <!-- <ul v-if="items.length">
+                <li v-for="item in items">{{ item.name }}</li>
+            </ul>
+            <p v-else>No items found.</p> -->
+        </div>
+        <script>
+            Vue.component("my-component", {
+                functional: true,
+                // props: ["items"],
+                // template:`
+                //     <label>你好呀</label>
+                // `,
+
+                // render:function(createElement){
+                //     return createElement("label","你好呀")
+                // }
+                // render: function (createElement) {
+                //     // console.log(this.items.length);
+                //     if(this.items.length){
+                //         return createElement("ul",this.items.map(function(item){
+                //             // console.log(item.name);
+                //             return createElement("li",item.name)
+                //         }))
+                //     }else{
+                //         return createElement("p","There is no items")
+                //     }
+                // }
+
+                // render: function (createElement) {
+                //     // `<div><slot></slot></div>`
+                //     console.log(this.$slots);
+
+                //     return createElement('div', this.$slots.default)
+                // }
+                render: function (createElement, context) {
+                    console.log(createElement);
+                    console.log(context.children);
+                    console.log(context.slots());
+
+                }
+                // render:function(createElement,content){
+                //     // console.log(content);
+                //     console.log(content.data.attrs.items);
+                //     console.log(content.children[0].text);
+
+
+                //     return createElement("h1",content.data,content.children)
+                // }
+            })
+            var vm = new Vue({
+                el: "#demo",
+                data: {
+                    blogTitle: "haoxiongdi",
+                    thep: "zheshiyige p",
+                    items: [
+                        { name: "it1" },
+                        { name: "it2" },
+                        { name: "it3" },
+                        { name: "it4" }
+                    ]
+                },
+                // render:function(createElement){
+                //     return createElement("label","你好呀")
+                // }
+                // render: function (createElement) {
+                //     // return createElement('h1', this.blogTitle,[
+                //     //     createElement("先写一些字","p",this.thep)
+                //     // ])
+                //     return createElement("p",[
+                //         createElement("h1","this is the h1"),
+                //         createElement("h2","this is the h2"),
+                //     ])
+                // }
+                // render: function (createElement) {
+                //     return createElement('div',
+                //         Array.apply(null, { length: 20 }).map(function () {
+                //             return createElement('p', 'hi')
+                //         })
+                //     )
+                // }
+            })
+            // => "hello!"
+            // 为自定义的选项 'myOption' 注入一个处理器。
+            // Vue.mixin({
+            //     created: function () {
+            //         var myOption = this.$options.myOption
+            //         if (myOption) {
+            //             console.log(myOption)
+            //         }
+            //     }
+            // })
+            // var vm1=new Vue({
+            //     myOption: 'hello!'
+            // })
+
+            // var vm2=new Vue({
+            //     myOption: 'hello222'
+            // })
+            // => "hello!"
+        </script>
+
+<body>
+    <html>
